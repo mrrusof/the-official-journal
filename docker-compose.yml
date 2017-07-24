@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  postgrest:
+    image: begriffs/postgrest:v0.3.2.0
+    ports:
+      - 3000:3000
+    links:
+      - the-law
+    environment:
+      PG_ENV_POSTGRES_USER: postgres
+      PG_ENV_POSTRGRES_PASSWORD: 
+      PG_PORT_5432_TCP_ADDR: the-law
+      PG_PORT_5432_TCP_PORT: 5432
+      PG_ENV_POSTGRES_DB: the_law
+      POSTGREST_SCHEMA: public
+      POSTGREST_ANONYMOUS: postgres
+  
+  the-law:
+    image: the-law
+    ports:
+      - 5432:5432

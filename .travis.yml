@@ -1,0 +1,21 @@
+language: generic
+
+services:
+  - docker
+  - postgresql
+
+before_install:
+  - sudo service postgresql stop
+  - cd /tmp
+  - curl -O https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/4.2.0/flyway-commandline-4.2.0-linux-x64.tar.gz
+  - tar -xzf flyway-commandline-4.2.0-linux-x64.tar.gz
+  - mkdir -p /opt/flyway/
+  - mv flyway-4.2.0 /opt/flyway/
+  - cd -
+  - export PATH=$PATH:/opt/flyway/flyway-4.2.0
+
+script:
+  - make
+
+notifications:
+  email: false
