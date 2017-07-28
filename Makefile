@@ -11,7 +11,7 @@ build: .build
 
 test: build
 	$(MAKE) start
-	curl http://127.0.0.1:3000/test_cases | grep '\[{"id":1,"problem_id":1,"input":"1\\n0\\n3\\n2\\n","output":"()\\n\\n()()()\\n()(())\\n(())()\\n(()())\\n((()))\\n()()\\n(())\\n"},{"id":2,"problem_id":1,"input":"1\\n","output":"()\\n"},{"id":3,"problem_id":1,"input":"2\\n","output":"()()\\n(())\\n"},{"id":4,"problem_id":1,"input":"3\\n","output":"()()()\\n()(())\\n(())()\\n(()())\\n((()))\\n"}\]'
+	curl 'http://127.0.0.1:3000/test_cases?id=eq.1' | grep '\[{"id":1,"problem_id":"all-balanced-parentheses-strings","input":"1\\n0\\n3\\n2\\n","output":"()\\n\\n()()()\\n()(())\\n(())()\\n(()())\\n((()))\\n()()\\n(())\\n"}\]'
 	$(MAKE) stop
 
 clean:
