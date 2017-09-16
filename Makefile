@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-all: test
+all: build
 
 build: .build
 	cd the-law && $(MAKE) build
@@ -8,6 +8,9 @@ build: .build
 .build: Dockerfile postgrest.conf
 	docker-compose build
 	touch .build
+
+push: build
+	docker-compose push the-official-journal
 
 test: build
 	$(MAKE) start
@@ -35,4 +38,4 @@ wait-for-postgrest:
 postgrest-is-up:
 	@curl --fail http://127.0.0.1:3000/ >/dev/null
 
-.PHONY: all build test clean start exec stop wait-for-postgrest postgrest-is-up
+.PHONY: all build push test clean start exec stop wait-for-postgrest postgrest-is-up

@@ -9,4 +9,6 @@ before_install:
   - export PATH=$PATH:/opt/flyway-4.2.0
 
 script:
-  - make
+  - make test
+  - docker login -u mrrusof -p $DOCKER_PWD
+  - make push

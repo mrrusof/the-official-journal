@@ -2,8 +2,9 @@ version: "3.2"
 
 services:
 
-  postgrest:
+  the-official-journal:
     build: .
+    image: mrrusof/the-official-journal
     ports:
       - 3000:3000
     links:
