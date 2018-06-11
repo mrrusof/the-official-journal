@@ -1,12 +1,13 @@
 SHELL=/bin/bash
 
-all: build
+BUILD_DIR=_build
+DOCKER_BTOKEN=$(BUILD_DIR)/docker.done
 
-build: .build
-	cd the-law && $(MAKE) build
+all build: $(DOCKER_BTOKEN)
 
-.build: Dockerfile postgrest.conf
-	docker-compose build
+$(DOCKER_BTOKEN): Dockerfile postgrest.conf
+	docker-compose pull the-law
+	docker-compose build the-official-journal
 	touch .build
 
 push: build
@@ -18,7 +19,7 @@ test: build
 	$(MAKE) stop
 
 clean:
-	rm -f .build
+	rm -rf $(BUILD_DIR)
 	cd the-law && $(MAKE) clean
 	docker-compose down --rmi local --remove-orphans --volumes
 
